@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .timer-container {
+            width: 300px;
+            padding: 30px;
+            border-radius: 100px;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        button {
+            padding: 10px 20px ;
+            border-radius: 5px;
+            border: 1px solid black;
+            font-size: 1rem;
+            font-weight: 600 ;
+            transition:all  .1s linear ;
+        }
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <h1 id="timer">00 : 00 : 00</h1>
+
+        <div>
+            <button id="btn-1">1</button>
+            <button>4</button>
+            <button>6</button>
+            <button>8</button>
+        </div>
+        <div>
+            <h1 id="text">00:00:00</h1>
+        </div>
+        <div>
+            <button id="start-btn">START</button>
+            <button id="stop-btn">STOP</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+    </div>
+    <script>
+        const timeTag = document.getElementById('timer');
+       let secs = 0;
+       let mins = 0;
+       let hrs = 0;
+       let timerId = null;
+       document.getElementById("start-btn").addEventListener('click',(event) => {
+           if(timerId === null) {
+            timerId = setInterval(() => {
+                secs++;
+                if(secs === 60) {
+                    mins++;
+                    secs = 0;
+                    if(mins === 60) {
+                        hrs++;
+                        mins = 0
+                    }
+                }
+                timeTag.innerText = timeFormat(hrs,mins,secs);
+            },1000)
+           }
+       })
+       document.getElementById("stop-btn").addEventListener('click',() => {
+            clearInterval(timerId);
+            timerId = null;
+       })
+
+       document.getElementById('reset-btn').addEventListener('click',()=>{
+        clearTimeout(timerId);
+        timerId-setInterval(()=>{
+            secs=0;
+        mins=0;
+        hrs=0;
+        timeTag.innerText = timeFormat(hrs,mins,secs);
+        timerId=null;
+        },1000)
+       
+       })
+        
+       document.getElementById('btn-1').addEventListener('click',()=>{
+        mins=0;
+        secs=60;
+        if(timerId === null){
+            timerId=setInterval(()=>{
+                if(mins>=0)
+             secs--;
+            if(secs === 0){
+                mins--;
+                secs=0;
+           
+            
+                // if(mins === 60){
+                //     hrs--;
+                //     mins=0;
+                // }
+            }
+        
+        timeTag.innerText = timeFormat(hrs,mins,secs);
+       },1000)
+    }
+})
+
+       function timeFormat(h,m,s) {
+            // let time = h < 10 ? "0" + h : h + "";
+            // time += " : ";
+            // time += m < 10 ? "0" + m : m + "";
+            // time += " : "
+            // time += s < 10 ? "0" + s : s + "";
+            // return time;
+            return `${h < 10 ? "0" + h : h} : ${m < 10 ? "0" + m : m} : ${s < 10 ? '0' + s : s}`;
+       }
+    </script>
+</body>
+</html>

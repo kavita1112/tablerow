@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Timer-1</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    .time-container{
+      width: 300px;
+      padding: 30px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap:30px;
+      border-radius: 10px;
+    }
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    button{
+      padding: 5px;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="time-container">
+    <h1 id="timer">00:00:00</h1>
+
+    <div class="button">
+      <button>2</button>
+      <button>4</button>
+      <button>8</button>
+      <h1>00:00:00</h1>
+    </div>
+    <div>
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+    
+  </div>
+
+  <script>
+   const times=document.getElementById("timer")
+    let sec=0;
+    let min=0;
+    let hrs=0;
+    let timerId=null;
+    const start=document.getElementById('start');
+    const stop2=document.getElementById('stop');
+    start.addEventListener('click',(event)=>{
+
+      if(timerId === null){
+        timerId= setInterval(()=>{
+       sec++;
+          if(sec === 60){
+            min++;
+            sec=0;
+            if(min === 60){
+              hrs++;
+              min=0;
+            }
+          }
+      //  console.log(timer)
+      times.innerText = timeFormat(hrs,min,sec);
+      },1000)
+      //timertag.innerText=timeFormat(hrs,min,sec)
+      //timeTag.innerText = timeFormat(hrs,mins,secs);
+    }
+  });
+  stop2.addEventListener('click',()=>{
+    clearInterval(timerId);
+    timerId=null;
+  })
+
+  document.getElementById('resetBtn').addEventListener('click',()=>{
+    clearInterval(timerId); 
+     sec=0;
+     min=0;
+     hrs=0;
+     times.innerText = timeFormat(hrs,min,sec);
+     
+      timerId=null;
+  });
+  
+  function timeFormat(h,m,s){
+    return `${h <10 ? "0"+h : h}: ${m <10 ? "0"+m : m} : ${s <10 ? "0"+s : s}`
+  
+  }
+  </script>
+</body>
+</html>

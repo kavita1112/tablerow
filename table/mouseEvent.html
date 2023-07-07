@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 100px;
+            border: 1px solid black;
+            margin-top: 35px;
+            background-color: bisque;
+        }
+        h2{
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2 id="click">click</h2>
+    </div>
+    <div>
+        <h2 id="mouseenter">mouseenter</h2>
+    </div>
+    <div>
+        <h2 id="mouseleave">mouseleave</h2>
+    </div>
+    <div>
+        <h2 id="mouseout">mouseout</h2>
+    </div>
+    <div>
+        <h2 id="mousemove">mousemove</h2>
+    </div>
+    <script>
+     document.getElementById('click').addEventListener('click',()=>{
+        console.log(click)
+     })
+
+   document.getElementById('mouseenter').addEventListener('mouseenter',()=>{
+    console.log('mouseenter')
+   })
+
+   document.getElementById('mouseleave').addEventListener('mouseleave',()=>{
+    console.log('mouseleave')
+   })
+
+   document.getElementById('mouseout').addEventListener('mouseout',()=>{
+    console.log('mouseout')
+   })
+
+   document.getElementById('mousemove').addEventListener('mousemove',()=>{
+    console.log('mousemove')
+   })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="timer-container">
+        <!-- <progress id="progressTimer" value="10" max="100">32%</progress> -->
+        <h1 id="timer">00 : 00 : 00</h1>
+     <div>
+            <button id="start-btn">START</button>
+            <button id="stop-btn">STOP</button>
+            <button id="reset-btn">RESET</button>
+           <!--  <button id="reset-btn">Reset</button> -->
+        </div>
+        <div id="option-container" class="option-container">
+
+        </div>
+        <!-- <progress id="progressTimer" value="10" max="100">32%</progress> -->
+    </div>
+
+
+    <script>
+        const timerTag=document.getElementById('timer');
+        const btnContainer=document.getElementById('option-container');
+        const option=[0.5,4,3,5,6,60,20];
+  
+        let secs=null;
+        function createSecfromMins(mins){
+            return mins*60; 
+        }
+
+        function createButton(butt){
+           butt.forEach((btn)=>{
+            const button=document.createElement('button');
+            button.innerText=btn;
+            button.addEventListener('click',()=>{
+               // console.log(button)
+             secs=createSecfromMins(btn);
+            //  console.log(secs)
+            timerTag.innerText=getTimeFormat(secs)
+            })
+            btnContainer.appendChild(button); 
+           })
+        }
+        createButton(option);
+
+          
+        let timerId=null;
+        function getTimeFormat(s){
+            let h=Math.trunc(s/60*60);
+            s=s%60*60
+            let m=Math.trunc(s/60);
+            s=s%60
+
+        }
+
+           document.getElementById('start-btn').addEventListener('click',()=>{
+            // console.log('helo')
+            if(timerId=null && secs !== null){
+                timerId=setInterval(()=>{
+                    secs--;
+                    timerTag.innerText=getTimeFormat(secs);
+                           if(secs === 60){
+                        clearInterval(timerId);
+                        timerId=null;
+                    }
+                },1000);
+            }
+
+           })
+           
+       
+
+    </script>
+</body>
+</html>
